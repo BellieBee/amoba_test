@@ -37,7 +37,7 @@ return new class extends Migration
             $table->double('credits_return');
             $table->boolean('cancel_employee')->default(0);
             $table->boolean('force_renovation')->default(0);
-            $table->timestamp('date_candeled')->nullable();
+            $table->timestamp('date_canceled')->nullable();
             $table->double('amount_confirm_canceled')->nullable();
             $table->double('credit_confirm_canceled')->nullable();
             $table->timestamps();
