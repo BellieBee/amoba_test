@@ -23,7 +23,7 @@ class UserPlan extends Model
         'requires_invoice',
         'status',
         'financiation',
-        'status_financiation',
+        'status_finantiation',
         'language_id',
         'nif',
         'business_name',
