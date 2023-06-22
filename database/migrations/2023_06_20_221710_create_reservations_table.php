@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_plan_id')->references('id')->on('user_plans');
             $table->unsignedBigInteger('route_id');
             $table->foreign('route_id')->references('id')->on('routes');
-            $table->unsignedBigInteger('track_id');
+            $table->unsignedBigInteger('track_id')->nullable();
             $table->foreign('track_id')->references('id')->on('tracks');
             $table->timestamp('reservation_start')->nullable();
             $table->timestamp('reservation_end')->nullable();

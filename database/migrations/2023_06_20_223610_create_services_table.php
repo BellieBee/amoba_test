@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('external_id');
             $table->string('external_budget_id');
             $table->string('external_route_id');
-            $table->unsignedBigInteger('track_id');
+            $table->unsignedBigInteger('track_id')->nullable();
             $table->foreign('track_id')->references('id')->on('tracks');
             $table->string('name');
             $table->string('notes')->nullable();
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->bigInteger('sale_tickets_drivers')->default(0);
             $table->string('notes_drivers')->nullable();
-            $table->string('itinerary_drivers');
+            $table->longText('itinerary_drivers');
             $table->double('cost_if_externalized')->nullable();
             $table->timestamps();
         });

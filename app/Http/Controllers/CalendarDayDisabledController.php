@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Exception;
-use App\Models\RouteData;
+use App\Models\CalendarDayDisabled;
 use Illuminate\Support\Facades\DB;
 
-class RouteDataController extends Controller
+class CalendarDayDisabledController extends Controller
 {
     public function store(Request $request) {
         try {
             DB::beginTransaction();
-            $route_data = RouteData::create($request->all());
+            $day_disabled = CalendarDayDisabled::create($request->all());
             DB::commit();
 
         } catch (Exception $e) {
@@ -23,6 +23,6 @@ class RouteDataController extends Controller
             ], 500);
         }
 
-        return response()->json($route_data, 201);
+        return response()->json($day_disabled, 201);
     }
 }
