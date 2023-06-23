@@ -26,21 +26,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-# User Routes
-Route::post('/user', [UserController::class, 'store'])->name('user.store');
-Route::post('/user/plan', [UserPlanController::class, 'store'])->name('user.plan.store');
+Route::post('login',[UserController::class,'loginUser']);
 
-# Route Routes
-Route::post('/route', [RouteController::class, 'store'])->name('route.store');
-Route::post('/route/data', [RouteDataController::class, 'store'])->name('route.data.store');
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::get('logout',[UserController::class,'logout']);
+    # User Routes
+    Route::post('/user', [UserController::class, 'store'])->name('user.store');
+    Route::post('/user/plan', [UserPlanController::class, 'store'])->name('user.plan.store');
 
-#Calendar Routes
-Route::get('/calendar/search/start/{start_date}/end/{end_date}', [CalendarController::class, 'search'])->name('calendar.search');
-Route::post('/calendar', [CalendarController::class, 'store'])->name('calendar.store');
-Route::post('/calendar/day/disabled', [CalendarDayDisabledController::class, 'store'])->name('calendar.day.disable');
+    # Route Routes
+    Route::get('/route/{id}', [RouteController::class, 'show'])->name('route.show');
+    Route::post('/route', [RouteController::class, 'store'])->name('route.store');
+    Route::post('/route/data', [RouteDataController::class, 'store'])->name('route.data.store');
 
-#Service Routes
-Route::post('/service', [ServiceController::class, 'store'])->name('service.store');
+    #Calendar Routes
+    Route::get('/calendar/{id}/search/start/{start_date}/end/{end_date}', [CalendarController::class, 'search'])->name('calendar.search');
+    Route::post('/calendar', [CalendarController::class, 'store'])->name('calendar.store');
+    Route::post('/calendar/day/disabled', [CalendarDayDisabledController::class, 'store'])->name('calendar.day.disable');
 
-#Reservation Routes
-Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+    #Service Routes
+    Route::post('/service', [ServiceController::class, 'store'])->name('service.store');
+
+    #Reservation Routes
+    Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+});
+
